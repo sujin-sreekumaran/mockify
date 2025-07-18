@@ -92,17 +92,22 @@ export function ChatEditor({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={cn(
-        "space-y-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700",
-        disabled && "opacity-50 pointer-events-none",
-        className
-      )}
+      className={cn("space-y-4", disabled && "opacity-50 pointer-events-none", className)}
     >
+      {/* Chat Details Section */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Chat Details</h3>
 
-        {/* Profile Images Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Contact Name Input */}
+        <ContactNameInput
+          value={chatData.contactName}
+          onChange={handleContactNameChange}
+          error={errors.contactName}
+          disabled={disabled}
+        />
+
+        {/* Profile Images Section - Stack vertically for sidebar */}
+        <div className="space-y-4">
           <ProfileImageUpload
             label="Contact Profile Image"
             preview={chatData.contactImage}
@@ -117,14 +122,6 @@ export function ChatEditor({
             disabled={disabled}
           />
         </div>
-
-        {/* Contact Name Input */}
-        <ContactNameInput
-          value={chatData.contactName}
-          onChange={handleContactNameChange}
-          error={errors.contactName}
-          disabled={disabled}
-        />
       </div>
 
       {/* Messages Section */}

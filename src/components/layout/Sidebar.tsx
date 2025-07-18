@@ -67,7 +67,7 @@ export function Sidebar({
         </motion.button>
       )}
 
-      <div className="h-full overflow-hidden">
+      <div className="h-full">
         <AnimatePresence mode="wait">
           {isCollapsed ? (
             <motion.div
@@ -76,7 +76,7 @@ export function Sidebar({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex h-full flex-col items-center justify-start pt-6 space-y-4"
+              className="flex h-full flex-col items-center justify-start pt-6 space-y-4 overflow-hidden"
             >
               {/* Collapsed state - show minimal icons */}
               <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
@@ -102,7 +102,7 @@ export function Sidebar({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="h-full p-6"
+              className="h-full overflow-y-auto overflow-x-hidden p-6"
             >
               {children}
             </motion.div>

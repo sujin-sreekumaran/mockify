@@ -7,6 +7,7 @@ type Theme = "light" | "dark";
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  systemTheme: Theme;
   setTheme: (theme: Theme) => void;
 }
 
@@ -14,16 +15,18 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
+  const [systemTheme, setSystemTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   // Handle hydration mismatch by only setting theme after mount
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme") as Theme;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const detectedSystemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    const initialTheme = savedTheme || systemTheme;
+    setSystemTheme(detectedSystemTheme);
+    const initialTheme = savedTheme || detectedSystemTheme;
     setThemeState(initialTheme);
     applyTheme(initialTheme);
   }, []);
@@ -54,7 +57,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, systemTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

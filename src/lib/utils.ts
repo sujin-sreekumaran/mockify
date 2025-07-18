@@ -11,6 +11,12 @@ export function generateId(): string {
   return Math.random().toString(36).substr(2, 9);
 }
 
-export function formatTimestamp(date: Date): string {
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+export function formatTimestamp(date: Date, format: "12h" | "24h" = "12h"): string {
+  const options: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: format === "12h",
+  };
+
+  return date.toLocaleTimeString([], options);
 }

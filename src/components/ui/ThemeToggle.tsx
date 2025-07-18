@@ -4,8 +4,20 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  // Use a try-catch to handle cases where ThemeProvider might not be available
+  let theme: "light" | "dark" = "light";
+  let toggleTheme = () => {};
+
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+    toggleTheme = themeContext.toggleTheme;
+  } catch (error) {
+    // ThemeProvider not available, use defaults
+    console.warn("ThemeToggle: ThemeProvider not available, using defaults");
+  }
 
   useEffect(() => {
     setMounted(true);

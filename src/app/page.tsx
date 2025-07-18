@@ -1,13 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// Force dynamic rendering to avoid SSG issues with useTheme
+export const dynamic = "force-dynamic";
 import { Header, Sidebar, Main } from "@/components/layout";
 import { Button, PlatformSelector } from "@/components/ui";
 import { ChatEditor } from "@/components/forms";
+import { InstagramPreview } from "@/components/platform-previews";
 import { PlatformId, ChatData } from "@/types";
+import { getPlatformConfig } from "@/lib/platforms";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Handle theme safely
+  let theme: "light" | "dark" = "light";
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    // ThemeProvider not available, use default
+    console.warn("Theme context not available, using default theme");
+  }
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformId>("instagram");
   const [chatData, setChatData] = useState<ChatData>({
     contactName: "",
@@ -77,45 +98,50 @@ export default function Home() {
         </Sidebar>
 
         <Main>
-          <div className="h-full flex items-center justify-center">
-            <div className="text-center max-w-md">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                  Preview Area
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Your chat preview will appear here once you configure the settings.
-                </p>
-
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    Platform: <span className="font-medium capitalize">{selectedPlatform}</span>
+          <div className="h-full flex items-center justify-center p-8">
+            {selectedPlatform === "instagram" ? (
+              <InstagramPreview
+                chatData={chatData}
+                config={getPlatformConfig("instagram") as any}
+                theme={theme}
+              />
+            ) : (
+              <div className="text-center max-w-md">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                    Preview Area
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    {selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)} preview
+                    will be implemented in upcoming tasks.
                   </p>
-                  {chatData.contactName && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                      Contact: <span className="font-medium">{chatData.contactName}</span>
-                    </p>
-                  )}
-                  {chatData.messages.length > 0 && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                      Messages: <span className="font-medium">{chatData.messages.length}</span>
-                    </p>
-                  )}
-                  {(chatData.contactImage || chatData.userImage) && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                      Profile Images:{" "}
-                      {[chatData.contactImage && "Contact", chatData.userImage && "User"]
-                        .filter(Boolean)
-                        .join(", ")}
-                    </p>
-                  )}
-                </div>
 
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  Chat preview will be implemented in upcoming tasks
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Platform: <span className="font-medium capitalize">{selectedPlatform}</span>
+                    </p>
+                    {chatData.contactName && (
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Contact: <span className="font-medium">{chatData.contactName}</span>
+                      </p>
+                    )}
+                    {chatData.messages.length > 0 && (
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Messages: <span className="font-medium">{chatData.messages.length}</span>
+                      </p>
+                    )}
+                    {(chatData.contactImage || chatData.userImage) && (
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Profile Images:{" "}
+                        {[chatData.contactImage && "Contact", chatData.userImage && "User"]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </Main>
       </div>

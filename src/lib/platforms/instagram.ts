@@ -22,7 +22,7 @@ export const instagramConfig: InstagramConfig = {
     fontFamily:
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     messageSize: "14px",
-    nameSize: "14px",
+    nameSize: "16px",
     timestampSize: "11px",
     fontWeight: {
       normal: "400",
@@ -33,7 +33,7 @@ export const instagramConfig: InstagramConfig = {
   layout: {
     bubbleRadius: "18px",
     spacing: "8px",
-    avatarSize: "24px",
+    avatarSize: "32px",
     maxBubbleWidth: "236px",
     padding: {
       message: "8px 12px",
@@ -41,7 +41,7 @@ export const instagramConfig: InstagramConfig = {
     },
     margins: {
       message: "2px 0",
-      timestamp: "8px 0",
+      timestamp: "4px 0",
     },
   },
   features: {

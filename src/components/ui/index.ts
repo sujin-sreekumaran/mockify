@@ -1,4 +1,6 @@
 // UI component exports
-// This file will be populated in later tasks
-
-// Placeholder - exports will be added as components are created
+export { Button } from "./Button";
+export { Input } from "./Input";
+export { FileUpload } from "./FileUpload";
+export { ThemeToggle } from "./ThemeToggle";
+export { PlatformSelector } from "./PlatformSelector";

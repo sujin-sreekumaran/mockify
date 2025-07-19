@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 import { Header, Sidebar, Main } from "@/components/layout";
 import { Button, PlatformSelector } from "@/components/ui";
 import { ChatEditor } from "@/components/forms";
-import { InstagramPreview } from "@/components/platform-previews";
+import { InstagramPreview, TwitterPreview } from "@/components/platform-previews";
 import { PlatformId, ChatData } from "@/types";
 import { getPlatformConfig } from "@/lib/platforms";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -103,6 +103,12 @@ export default function Home() {
               <InstagramPreview
                 chatData={chatData}
                 config={getPlatformConfig("instagram") as any}
+                theme={theme}
+              />
+            ) : selectedPlatform === "twitter" ? (
+              <TwitterPreview
+                chatData={chatData}
+                config={getPlatformConfig("twitter") as any}
                 theme={theme}
               />
             ) : (

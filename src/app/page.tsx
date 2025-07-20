@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 import { Header, Sidebar, Main } from "@/components/layout";
 import { Button, PlatformSelector } from "@/components/ui";
 import { ChatEditor } from "@/components/forms";
-import { InstagramPreview, TwitterPreview } from "@/components/platform-previews";
+import { InstagramPreview, TwitterPreview, WhatsAppPreview } from "@/components/platform-previews";
 import { PlatformId, ChatData } from "@/types";
 import { getPlatformConfig } from "@/lib/platforms";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -111,6 +111,8 @@ export default function Home() {
                 config={getPlatformConfig("twitter") as any}
                 theme={theme}
               />
+            ) : selectedPlatform === "whatsapp" ? (
+              <WhatsAppPreview chatData={chatData} config={getPlatformConfig("whatsapp") as any} />
             ) : (
               <div className="text-center max-w-md">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">

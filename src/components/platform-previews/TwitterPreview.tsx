@@ -342,7 +342,7 @@ export const TwitterPreview: React.FC<TwitterPreviewProps> = ({
   const { contactName, contactImage, messages } = chatData;
 
   // Empty state
-  if (!contactName || messages.length === 0) {
+  if (messages.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -427,7 +427,11 @@ export const TwitterPreview: React.FC<TwitterPreviewProps> = ({
       }}
     >
       {/* Header */}
-      <TwitterHeader contactName={contactName} contactImage={contactImage} config={config} />
+      <TwitterHeader
+        contactName={contactName || "Contact"}
+        contactImage={contactImage}
+        config={config}
+      />
 
       {/* Messages Container */}
       <motion.div

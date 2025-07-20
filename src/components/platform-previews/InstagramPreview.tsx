@@ -521,7 +521,7 @@ export const InstagramPreview: React.FC<InstagramPreviewProps> = ({
   const { contactName, contactImage, messages } = chatData;
 
   // Empty state with smooth animations
-  if (!contactName || messages.length === 0) {
+  if (messages.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -610,7 +610,11 @@ export const InstagramPreview: React.FC<InstagramPreviewProps> = ({
       }}
     >
       {/* Header */}
-      <InstagramHeader contactName={contactName} contactImage={contactImage} config={config} />
+      <InstagramHeader
+        contactName={contactName || "Contact"}
+        contactImage={contactImage}
+        config={config}
+      />
 
       {/* Messages Container */}
       <motion.div

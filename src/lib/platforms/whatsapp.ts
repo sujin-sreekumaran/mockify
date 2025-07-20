@@ -17,8 +17,8 @@ export const whatsappConfig: WhatsAppConfig = {
   typography: {
     fontFamily:
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    messageSize: "14px",
-    nameSize: "16px",
+    messageSize: "15px",
+    nameSize: "18px",
     timestampSize: "11px",
     fontWeight: {
       normal: "400",
@@ -27,13 +27,13 @@ export const whatsappConfig: WhatsAppConfig = {
     },
   },
   layout: {
-    bubbleRadius: "7.5px",
+    bubbleRadius: "8px",
     spacing: "2px",
-    avatarSize: "40px",
-    maxBubbleWidth: "65%",
+    avatarSize: "42px",
+    maxBubbleWidth: "75%",
     padding: {
-      message: "6px 7px 8px 9px",
-      container: "12px",
+      message: "8px 12px 8px 12px",
+      container: "16px",
     },
     margins: {
       message: "1px 0",
@@ -43,10 +43,10 @@ export const whatsappConfig: WhatsAppConfig = {
   features: {
     hasStatusIndicators: true,
     hasTypingIndicator: true,
-    hasOnlineStatus: true,
+    hasOnlineStatus: false,
     hasMessageReactions: false,
-    timestampFormat: "24h",
+    timestampFormat: "12h",
     hasDeliveryStatus: true,
-    hasLastSeen: true,
+    hasLastSeen: false,
   },
 };

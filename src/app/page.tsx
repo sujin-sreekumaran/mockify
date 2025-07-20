@@ -7,7 +7,13 @@ export const dynamic = "force-dynamic";
 import { Header, Sidebar, Main } from "@/components/layout";
 import { Button, PlatformSelector } from "@/components/ui";
 import { ChatEditor } from "@/components/forms";
-import { InstagramPreview, TwitterPreview, WhatsAppPreview } from "@/components/platform-previews";
+import {
+  InstagramPreview,
+  TwitterPreview,
+  WhatsAppPreview,
+  FacebookPreview,
+  TinderPreview,
+} from "@/components/platform-previews";
 import { PlatformId, ChatData } from "@/types";
 import { getPlatformConfig } from "@/lib/platforms";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -113,6 +119,18 @@ export default function Home() {
               />
             ) : selectedPlatform === "whatsapp" ? (
               <WhatsAppPreview chatData={chatData} config={getPlatformConfig("whatsapp") as any} />
+            ) : selectedPlatform === "facebook" ? (
+              <FacebookPreview
+                chatData={chatData}
+                config={getPlatformConfig("facebook") as any}
+                theme={theme}
+              />
+            ) : selectedPlatform === "tinder" ? (
+              <TinderPreview
+                chatData={chatData}
+                config={getPlatformConfig("tinder") as any}
+                theme={theme}
+              />
             ) : (
               <div className="text-center max-w-md">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
@@ -120,32 +138,13 @@ export default function Home() {
                     Preview Area
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    {selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)} preview
-                    will be implemented in upcoming tasks.
+                    Platform preview not available.
                   </p>
 
                   <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Platform: <span className="font-medium capitalize">{selectedPlatform}</span>
+                      Please select a supported platform.
                     </p>
-                    {chatData.contactName && (
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        Contact: <span className="font-medium">{chatData.contactName}</span>
-                      </p>
-                    )}
-                    {chatData.messages.length > 0 && (
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        Messages: <span className="font-medium">{chatData.messages.length}</span>
-                      </p>
-                    )}
-                    {(chatData.contactImage || chatData.userImage) && (
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        Profile Images:{" "}
-                        {[chatData.contactImage && "Contact", chatData.userImage && "User"]
-                          .filter(Boolean)
-                          .join(", ")}
-                      </p>
-                    )}
                   </div>
                 </div>
               </div>

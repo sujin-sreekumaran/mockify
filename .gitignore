@@ -2,3 +2,4 @@ node_modules
 .kiro
 .next
 .vscode
+tsconfig.tsbuildinfo

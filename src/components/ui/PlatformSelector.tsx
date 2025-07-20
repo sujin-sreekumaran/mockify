@@ -152,40 +152,6 @@ export function PlatformSelector({
           </motion.button>
         ))}
       </div>
-
-      {/* Platform Color Preview */}
-      <motion.div
-        className="mt-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-800"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">Selected Theme Preview</div>
-        <div className="flex items-center gap-2">
-          <div
-            className="w-4 h-4 rounded-full"
-            style={{
-              backgroundColor: platforms.find((p) => p.id === selectedPlatform)?.colors.primary,
-            }}
-          />
-          <div
-            className="w-4 h-4 rounded-full"
-            style={{
-              backgroundColor: platforms.find((p) => p.id === selectedPlatform)?.colors.secondary,
-            }}
-          />
-          {platforms.find((p) => p.id === selectedPlatform)?.colors.gradient && (
-            <div
-              className="w-8 h-4 rounded-full"
-              style={{
-                background: `linear-gradient(90deg, ${
-                  platforms.find((p) => p.id === selectedPlatform)?.colors.gradient?.from
-                }, ${platforms.find((p) => p.id === selectedPlatform)?.colors.gradient?.to})`,
-              }}
-            />
-          )}
-        </div>
-      </motion.div>
     </div>
   );
 }

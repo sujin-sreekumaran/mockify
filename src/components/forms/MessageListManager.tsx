@@ -106,7 +106,7 @@ export function MessageListManager({
       className="space-y-4"
     >
       {/* Messages List */}
-      <div className="space-y-3 max-h-96 overflow-y-auto">
+      <div className="space-y-3 max-h-[32rem] overflow-y-auto">
         <AnimatePresence mode="popLayout">
           {messages.map((message, index) => (
             <motion.div

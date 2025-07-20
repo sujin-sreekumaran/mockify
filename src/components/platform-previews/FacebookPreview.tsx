@@ -594,7 +594,7 @@ export const FacebookPreview: React.FC<FacebookPreviewProps> = ({
           backgroundColor: config.colors.background,
           padding: "16px",
           minHeight: "480px",
-          maxHeight: "480px",
+          maxHeight: "600px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",

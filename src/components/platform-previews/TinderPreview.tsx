@@ -431,7 +431,7 @@ export const TinderPreview: React.FC<TinderPreviewProps> = ({
           backgroundColor: config.colors.background,
           padding: "20px",
           minHeight: "460px",
-          maxHeight: "460px",
+          maxHeight: "580px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",

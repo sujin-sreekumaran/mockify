@@ -440,7 +440,7 @@ export const TwitterPreview: React.FC<TwitterPreviewProps> = ({
           backgroundColor: config.colors.background,
           padding: "16px",
           minHeight: "456px",
-          maxHeight: "456px",
+          maxHeight: "576px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",

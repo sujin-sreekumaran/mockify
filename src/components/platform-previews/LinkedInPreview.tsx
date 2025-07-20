@@ -463,7 +463,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
           backgroundColor: config.colors.background,
           padding: "16px",
           minHeight: "476px",
-          maxHeight: "476px",
+          maxHeight: "596px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",

@@ -360,7 +360,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full max-w-sm mx-auto overflow-hidden ${className}`}
+        className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
         style={{
           backgroundColor: config.colors.background,
           borderRadius: "12px",
@@ -439,7 +439,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`w-full max-w-sm mx-auto overflow-hidden ${className}`}
+      className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
       style={{
         backgroundColor: config.colors.background,
         borderRadius: "12px",

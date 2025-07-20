@@ -3,5 +3,4 @@ node_modules
 .next
 .vscode
 tsconfig.tsbuildinfo
-.prettierrc
-.prettierignore
+.github

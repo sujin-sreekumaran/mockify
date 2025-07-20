@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 export const dynamic = "force-dynamic";
 import { Header, Sidebar, Main } from "@/components/layout";
-import { Button, PlatformSelector } from "@/components/ui";
+import { Button, PlatformSelector, ScreenshotGenerator } from "@/components/ui";
 import { ChatEditor } from "@/components/forms";
 import {
   InstagramPreview,
@@ -22,6 +22,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   // Handle theme safely
   let theme: "light" | "dark" = "light";
@@ -48,19 +49,64 @@ export default function Home() {
     setChatData(newChatData);
   };
 
-  const handleGenerate = async () => {
-    setLoading(true);
-    // Simulate screenshot generation
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoading(false);
-  };
-
   const handleReset = () => {
     setChatData({
       contactName: "",
       contactImage: null,
       userImage: null,
       messages: [],
+    });
+  };
+
+  const handleLoadSample = () => {
+    setChatData({
+      contactName: "Alex Johnson",
+      contactImage: null,
+      userImage: null,
+      messages: [
+        {
+          id: "1",
+          content: "Hey! How are you doing?",
+          sender: "contact",
+          timestamp: new Date(Date.now() - 300000),
+          type: "text",
+        },
+        {
+          id: "2", 
+          content: "I'm doing great! Just finished work. How about you?",
+          sender: "user",
+          timestamp: new Date(Date.now() - 240000),
+          type: "text",
+        },
+        {
+          id: "3",
+          content: "Same here! Want to grab dinner tonight?",
+          sender: "contact", 
+          timestamp: new Date(Date.now() - 180000),
+          type: "text",
+        },
+        {
+          id: "4",
+          content: "Sounds perfect! What time works for you?",
+          sender: "user",
+          timestamp: new Date(Date.now() - 120000),
+          type: "text",
+        },
+        {
+          id: "5",
+          content: "How about 7 PM at that new Italian place?",
+          sender: "contact",
+          timestamp: new Date(Date.now() - 60000),
+          type: "text",
+        },
+        {
+          id: "6",
+          content: "Perfect! See you there 😊",
+          sender: "user",
+          timestamp: new Date(),
+          type: "text",
+        },
+      ],
     });
   };
 
@@ -132,67 +178,80 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Button
-                  variant="primary"
-                  className="w-full h-12 text-base font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200"
-                  loading={loading}
-                  onClick={handleGenerate}
-                  disabled={!chatData.contactName || chatData.messages.length === 0}
+              <ScreenshotGenerator
+                targetRef={previewRef}
+                filename={`${selectedPlatform}-dm-screenshot`}
+                onGenerating={setLoading}
+                onSuccess={(blob) => {
+                  console.log("Screenshot generated successfully:", {
+                    size: blob.size,
+                    type: blob.type,
+                    platform: selectedPlatform,
+                    hasMessages: chatData.messages.length > 0,
+                    contactName: chatData.contactName
+                  });
+                }}
+                onError={(error) => {
+                  console.error("Screenshot generation failed:", error);
+                  console.log("Debug info:", {
+                    platform: selectedPlatform,
+                    hasMessages: chatData.messages.length > 0,
+                    contactName: chatData.contactName,
+                    elementExists: !!previewRef.current
+                  });
+                }}
+                className="w-full"
+              />
+
+              <div className="grid grid-cols-2 gap-2">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  {loading ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                      <span>Generating...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-2">
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
+                  <Button
+                    variant="secondary"
+                    className="w-full h-10 text-sm"
+                    onClick={handleLoadSample}
+                  >
+                    <div className="flex items-center space-x-1">
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                         />
                       </svg>
-                      <span>Generate Screenshot</span>
+                      <span>Sample</span>
                     </div>
-                  )}
-                </Button>
-              </motion.div>
+                  </Button>
+                </motion.div>
 
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Button
-                  variant="outline"
-                  className="w-full h-10 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
-                  onClick={handleReset}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <div className="flex items-center space-x-2">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                      />
-                    </svg>
-                    <span>Reset Form</span>
-                  </div>
-                </Button>
-              </motion.div>
+                  <Button
+                    variant="outline"
+                    className="w-full h-10 text-sm border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
+                    onClick={handleReset}
+                  >
+                    <div className="flex items-center space-x-1">
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                      </svg>
+                      <span>Reset</span>
+                    </div>
+                  </Button>
+                </motion.div>
+              </div>
 
               {/* Stats */}
               <motion.div
@@ -222,56 +281,58 @@ export default function Home() {
 
         <Main>
           <div className="h-full flex items-center justify-center p-8">
-            {selectedPlatform === "instagram" ? (
-              <InstagramPreview
-                chatData={chatData}
-                config={getPlatformConfig("instagram") as any}
-                theme={theme}
-              />
-            ) : selectedPlatform === "twitter" ? (
-              <TwitterPreview
-                chatData={chatData}
-                config={getPlatformConfig("twitter") as any}
-                theme={theme}
-              />
-            ) : selectedPlatform === "whatsapp" ? (
-              <WhatsAppPreview chatData={chatData} config={getPlatformConfig("whatsapp") as any} />
-            ) : selectedPlatform === "facebook" ? (
-              <FacebookPreview
-                chatData={chatData}
-                config={getPlatformConfig("facebook") as any}
-                theme={theme}
-              />
-            ) : selectedPlatform === "tinder" ? (
-              <TinderPreview
-                chatData={chatData}
-                config={getPlatformConfig("tinder") as any}
-                theme={theme}
-              />
-            ) : selectedPlatform === "linkedin" ? (
-              <LinkedInPreview
-                chatData={chatData}
-                config={getPlatformConfig("linkedin") as any}
-                theme={theme}
-              />
-            ) : (
-              <div className="text-center max-w-md">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                    Preview Area
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Platform preview not available.
-                  </p>
-
-                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Please select a supported platform.
+            <div ref={previewRef} className="inline-block p-4 bg-transparent">
+              {selectedPlatform === "instagram" ? (
+                <InstagramPreview
+                  chatData={chatData}
+                  config={getPlatformConfig("instagram") as any}
+                  theme={theme}
+                />
+              ) : selectedPlatform === "twitter" ? (
+                <TwitterPreview
+                  chatData={chatData}
+                  config={getPlatformConfig("twitter") as any}
+                  theme={theme}
+                />
+              ) : selectedPlatform === "whatsapp" ? (
+                <WhatsAppPreview chatData={chatData} config={getPlatformConfig("whatsapp") as any} />
+              ) : selectedPlatform === "facebook" ? (
+                <FacebookPreview
+                  chatData={chatData}
+                  config={getPlatformConfig("facebook") as any}
+                  theme={theme}
+                />
+              ) : selectedPlatform === "tinder" ? (
+                <TinderPreview
+                  chatData={chatData}
+                  config={getPlatformConfig("tinder") as any}
+                  theme={theme}
+                />
+              ) : selectedPlatform === "linkedin" ? (
+                <LinkedInPreview
+                  chatData={chatData}
+                  config={getPlatformConfig("linkedin") as any}
+                  theme={theme}
+                />
+              ) : (
+                <div className="text-center max-w-md">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Preview Area
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Platform preview not available.
                     </p>
+
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Please select a supported platform.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </Main>
       </div>

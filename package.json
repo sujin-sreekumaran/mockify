@@ -1,12 +1,46 @@
 {
-  "name": "dm-screenshot-generator",
-  "version": "0.1.0",
+  "name": "mockify",
+  "version": "1.0.0",
+  "description": "Create stunning, authentic-looking direct message screenshots for all major platforms",
+  "author": "Mockify Team",
+  "license": "MIT",
+  "homepage": "https://mockify.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sujin-sreekumaran/mockify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sujin-sreekumaran/mockify/issues"
+  },
+  "keywords": [
+    "screenshot",
+    "mockup",
+    "social-media",
+    "dm",
+    "chat",
+    "instagram",
+    "twitter",
+    "whatsapp",
+    "facebook",
+    "tinder",
+    "linkedin",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "rm -rf .next out",
+    "analyze": "ANALYZE=true npm run build",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.11",

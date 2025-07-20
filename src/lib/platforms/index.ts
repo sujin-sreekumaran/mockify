@@ -4,6 +4,7 @@ import { twitterConfig } from "./twitter";
 import { whatsappConfig } from "./whatsapp";
 import { facebookConfig } from "./facebook";
 import { tinderConfig } from "./tinder";
+import { linkedinConfig } from "./linkedin";
 
 // ============================================================================
 // Platform Configuration Map
@@ -15,6 +16,7 @@ export const platformConfigs: PlatformConfigMap = {
   whatsapp: whatsappConfig,
   facebook: facebookConfig,
   tinder: tinderConfig,
+  linkedin: linkedinConfig,
 };
 
 // ============================================================================
@@ -283,6 +285,7 @@ function getDarkModeText(lightColor: string): string {
     "#303030": "#E1E9F0", // WhatsApp
     "#1C1E21": "#E4E6EA", // Facebook
     "#424242": "#FFFFFF", // Tinder
+    "#000000": "#FFFFFF", // LinkedIn
   };
 
   return darkTexts[lightColor] || "#FFFFFF";
@@ -298,6 +301,7 @@ function getDarkModeTextSecondary(lightColor: string): string {
     "#667781": "#8696A0", // WhatsApp
     "#65676B": "#B0B3B8", // Facebook
     "#999999": "#CCCCCC", // Tinder
+    "#666666": "#AAAAAA", // LinkedIn
   };
 
   return darkSecondaryTexts[lightColor] || "#AAAAAA";
@@ -313,6 +317,7 @@ function getDarkModeContactBubble(lightColor: string): string {
     "#FFFFFF": "#262D31", // WhatsApp
     "#F1F1F1": "#3A3B3C", // Facebook
     "#F5F5F5": "#2A2A2A", // Tinder
+    "#F3F2EF": "#2A2A2A", // LinkedIn
   };
 
   return darkContactBubbles[lightColor] || "#333333";
@@ -359,6 +364,13 @@ export function getPlatformDisplayInfo(platformId: PlatformId) {
 // Exports
 // ============================================================================
 
-export { instagramConfig, twitterConfig, whatsappConfig, facebookConfig, tinderConfig };
+export {
+  instagramConfig,
+  twitterConfig,
+  whatsappConfig,
+  facebookConfig,
+  tinderConfig,
+  linkedinConfig,
+};
 
 export type { PlatformConfig, PlatformId, PlatformConfigMap };

@@ -13,6 +13,7 @@ import {
   WhatsAppPreview,
   FacebookPreview,
   TinderPreview,
+  LinkedInPreview,
 } from "@/components/platform-previews";
 import { PlatformId, ChatData } from "@/types";
 import { getPlatformConfig } from "@/lib/platforms";
@@ -129,6 +130,12 @@ export default function Home() {
               <TinderPreview
                 chatData={chatData}
                 config={getPlatformConfig("tinder") as any}
+                theme={theme}
+              />
+            ) : selectedPlatform === "linkedin" ? (
+              <LinkedInPreview
+                chatData={chatData}
+                config={getPlatformConfig("linkedin") as any}
                 theme={theme}
               />
             ) : (

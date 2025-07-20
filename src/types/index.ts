@@ -33,7 +33,7 @@ export interface PhoneStatus {
 // Platform Configuration
 // ============================================================================
 
-export type PlatformId = "instagram" | "twitter" | "whatsapp" | "facebook" | "tinder";
+export type PlatformId = "instagram" | "twitter" | "whatsapp" | "facebook" | "tinder" | "linkedin";
 
 export interface PlatformConfig {
   id: PlatformId;
@@ -136,6 +136,14 @@ export interface TinderConfig extends PlatformConfig {
   features: PlatformFeatures & {
     hasMatchInfo: boolean;
     hasGifSupport: boolean;
+  };
+}
+
+export interface LinkedInConfig extends PlatformConfig {
+  id: "linkedin";
+  features: PlatformFeatures & {
+    hasProfessionalInfo: boolean;
+    hasConnectionStatus: boolean;
   };
 }
 

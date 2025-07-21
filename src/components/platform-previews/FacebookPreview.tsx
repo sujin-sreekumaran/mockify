@@ -498,13 +498,14 @@ export const FacebookPreview: React.FC<FacebookPreviewProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+        className={`mx-auto overflow-hidden ${className}`}
         style={{
           backgroundColor: config.colors.background,
           borderRadius: "12px",
           boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",
           border: "0.5px solid #E4E6EA",
           minHeight: "600px",
+          width: "375px", // Explicit mobile phone width
         }}
       >
         <FacebookHeader
@@ -570,13 +571,14 @@ export const FacebookPreview: React.FC<FacebookPreviewProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+      className={`mx-auto overflow-hidden ${className}`}
       style={{
         backgroundColor: config.colors.background,
         borderRadius: "12px",
         boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",
         border: "0.5px solid #E4E6EA",
         minHeight: "600px",
+        width: "375px", // Explicit mobile phone width
         maxHeight: "700px",
       }}
     >

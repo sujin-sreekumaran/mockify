@@ -7,7 +7,7 @@ import type { ScreenshotOptions, ScreenshotResult } from "@/types";
  * Default screenshot options for high-quality image generation
  */
 const DEFAULT_OPTIONS: Required<ScreenshotOptions> = {
-  width: 448, // max-w-md equivalent (28rem = 448px)
+  width: 375, // Standard mobile phone width
   height: 700, // Adjusted height for mobile preview
   quality: 1.0,
   format: "png" as const,

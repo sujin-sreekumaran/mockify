@@ -31,7 +31,7 @@ export default function Home() {
     theme = themeContext.theme;
   } catch (error) {
     // ThemeProvider not available, use default
-    console.warn("Theme context not available, using default theme");
+    
   }
 
   useEffect(() => {
@@ -281,7 +281,7 @@ export default function Home() {
 
         <Main>
           <div className="h-full flex items-center justify-center p-8">
-            <div ref={previewRef} className="inline-block p-4 bg-transparent">
+            <div ref={previewRef} className="p-4 bg-transparent" style={{ display: "inline-block", minWidth: "375px" }}>
               {selectedPlatform === "instagram" ? (
                 <InstagramPreview
                   chatData={chatData}

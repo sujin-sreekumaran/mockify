@@ -169,18 +169,7 @@ const TinderHeader: React.FC<{
         >
           {contactName}
         </div>
-        {config.features.hasMatchInfo && (
-          <div
-            className="text-sm text-white/80"
-            style={{
-              fontFamily: config.typography.fontFamily,
-              fontSize: "14px",
-              lineHeight: "18px",
-            }}
-          >
-            You matched on 7/20/25
-          </div>
-        )}
+       
       </div>
 
       {/* Action buttons */}
@@ -326,13 +315,14 @@ export const TinderPreview: React.FC<TinderPreviewProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+        className={`mx-auto overflow-hidden ${className}`}
         style={{
           backgroundColor: config.colors.background,
           borderRadius: "16px",
           boxShadow: "0 12px 40px rgba(253, 80, 104, 0.15)",
           border: "0.5px solid #F0F0F0",
           minHeight: "600px",
+          width: "375px", // Explicit mobile phone width
         }}
       >
         <TinderHeader
@@ -407,7 +397,7 @@ export const TinderPreview: React.FC<TinderPreviewProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+      className={`mx-auto overflow-hidden ${className}`}
       style={{
         backgroundColor: config.colors.background,
         borderRadius: "16px",
@@ -415,6 +405,7 @@ export const TinderPreview: React.FC<TinderPreviewProps> = ({
         border: "0.5px solid #F0F0F0",
         minHeight: "600px",
         maxHeight: "700px",
+        width: "375px", // Explicit mobile phone width
       }}
     >
       {/* Header */}

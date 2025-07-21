@@ -360,13 +360,14 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+        className={`mx-auto overflow-hidden ${className}`}
         style={{
           backgroundColor: config.colors.background,
           borderRadius: "12px",
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
           border: "1px solid #E0E0E0",
           minHeight: "600px",
+          width: "375px", // Explicit mobile phone width
         }}
       >
         <LinkedInHeader
@@ -439,7 +440,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+      className={`mx-auto overflow-hidden ${className}`}
       style={{
         backgroundColor: config.colors.background,
         borderRadius: "12px",
@@ -447,6 +448,7 @@ export const LinkedInPreview: React.FC<LinkedInPreviewProps> = ({
         border: "1px solid #E0E0E0",
         minHeight: "600px",
         maxHeight: "700px",
+        width: "375px", // Explicit mobile phone width
       }}
     >
       {/* Header */}

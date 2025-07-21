@@ -348,11 +348,12 @@ export const TwitterPreview: React.FC<TwitterPreviewProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+        className={`mx-auto overflow-hidden ${className}`}
         style={{
           backgroundColor: config.colors.background,
           borderRadius: "12px",
           minHeight: "600px",
+          width: "375px", // Explicit mobile phone width
         }}
       >
         <TwitterHeader
@@ -418,12 +419,13 @@ export const TwitterPreview: React.FC<TwitterPreviewProps> = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`w-full max-w-md mx-auto overflow-hidden ${className}`}
+      className={`mx-auto overflow-hidden ${className}`}
       style={{
         backgroundColor: config.colors.background,
         borderRadius: "12px",
         minHeight: "600px",
         maxHeight: "700px",
+        width: "375px", // Explicit mobile phone width
       }}
     >
       {/* Header */}

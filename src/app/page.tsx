@@ -183,22 +183,11 @@ export default function Home() {
                 filename={`${selectedPlatform}-dm-screenshot`}
                 onGenerating={setLoading}
                 onSuccess={(blob) => {
-                  console.log("Screenshot generated successfully:", {
-                    size: blob.size,
-                    type: blob.type,
-                    platform: selectedPlatform,
-                    hasMessages: chatData.messages.length > 0,
-                    contactName: chatData.contactName
-                  });
+                 
                 }}
                 onError={(error) => {
                   console.error("Screenshot generation failed:", error);
-                  console.log("Debug info:", {
-                    platform: selectedPlatform,
-                    hasMessages: chatData.messages.length > 0,
-                    contactName: chatData.contactName,
-                    elementExists: !!previewRef.current
-                  });
+                 
                 }}
                 className="w-full"
               />
